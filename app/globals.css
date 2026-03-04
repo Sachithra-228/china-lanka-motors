@@ -1,0 +1,298 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-cream: #efece3;
+  --blue-light: #8fabd4;
+  --blue-deep: #4a70a9;
+  --text-black: #000000;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+}
+
+body {
+  min-height: 100vh;
+}
+
+.page-shell {
+  min-height: 100vh;
+  background-color: var(--bg-cream);
+}
+
+.card {
+  @apply bg-[#F6F3EA] rounded-2xl shadow-soft transition-transform transition-shadow duration-200 ease-out;
+}
+
+.card-hover {
+  @apply hover:-translate-y-1 hover:shadow-xl;
+}
+
+.badge {
+  @apply inline-flex items-center rounded-full bg-brand-blueLight/20 px-3 py-1 text-xs font-medium text-brand-blueDeep;
+}
+
+.container-padded {
+  @apply mx-auto max-w-6xl px-4 sm:px-6 lg:px-8;
+}
+
+.hero-panel {
+  background:
+    radial-gradient(circle at 15% 20%, rgba(143, 171, 212, 0.18), transparent 34%),
+    radial-gradient(circle at 85% 18%, rgba(103, 232, 249, 0.14), transparent 28%),
+    linear-gradient(135deg, #10244d 0%, #173566 42%, #0f2e57 100%);
+}
+
+.hero-grid-overlay {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-size: 34px 34px;
+  mask-image: radial-gradient(circle at center, black 45%, transparent 95%);
+}
+
+.hero-scan-line {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(103, 232, 249, 0.08) 35%,
+    rgba(255, 255, 255, 0.12) 50%,
+    rgba(103, 232, 249, 0.08) 65%,
+    transparent 100%
+  );
+  animation: hero-scan 8s linear infinite;
+}
+
+.hero-electric-text {
+  text-shadow: 0 0 18px rgba(103, 232, 249, 0.15);
+  animation: hero-electric-glow 3.2s ease-in-out infinite;
+}
+
+.hero-pulse-dot {
+  box-shadow: 0 0 0 rgba(103, 232, 249, 0.45);
+  animation: hero-pulse 1.8s ease-out infinite;
+}
+
+.hero-image-float {
+  animation: hero-float 5.2s ease-in-out infinite;
+}
+
+.hero-image-ring {
+  animation: hero-ring 5s ease-in-out infinite;
+}
+
+.hero-image-ring-delayed {
+  animation: hero-ring 5s ease-in-out infinite 1.3s;
+}
+
+.why-tech-panel {
+  background:
+    radial-gradient(circle at 18% 22%, rgba(143, 171, 212, 0.16), transparent 28%),
+    radial-gradient(circle at 82% 16%, rgba(103, 232, 249, 0.12), transparent 26%),
+    linear-gradient(135deg, #0c244f 0%, #13356a 48%, #0f2f59 100%);
+  box-shadow: 0 28px 70px rgba(10, 27, 60, 0.22);
+}
+
+.why-tech-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.why-tech-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04));
+  backdrop-filter: blur(10px);
+  transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+}
+
+.why-tech-card::before {
+  content: '';
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(103, 232, 249, 0.9), transparent);
+  transform: translateX(-100%);
+  animation: why-tech-sweep 4.8s linear infinite;
+}
+
+.why-tech-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(103, 232, 249, 0.22);
+  box-shadow: 0 18px 36px rgba(5, 17, 41, 0.24);
+}
+
+.curated-orb-a {
+  animation: curated-orb-a 10s ease-in-out infinite;
+}
+
+.curated-orb-b {
+  animation: curated-orb-b 12s ease-in-out infinite;
+}
+
+.how-bubble-a {
+  animation: how-bubble-a 9s ease-in-out infinite;
+}
+
+.how-bubble-b {
+  animation: how-bubble-b 11s ease-in-out infinite;
+}
+
+.how-bubble-c {
+  animation: how-bubble-c 8.5s ease-in-out infinite;
+}
+
+@keyframes hero-scan {
+  0% {
+    transform: translateX(-120%);
+  }
+
+  100% {
+    transform: translateX(280%);
+  }
+}
+
+@keyframes hero-electric-glow {
+  0%,
+  100% {
+    opacity: 1;
+    text-shadow: 0 0 12px rgba(103, 232, 249, 0.14);
+  }
+
+  50% {
+    opacity: 0.92;
+    text-shadow: 0 0 22px rgba(103, 232, 249, 0.28);
+  }
+}
+
+@keyframes hero-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(103, 232, 249, 0.4);
+  }
+
+  70% {
+    box-shadow: 0 0 0 8px rgba(103, 232, 249, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(103, 232, 249, 0);
+  }
+}
+
+@keyframes hero-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes hero-ring {
+  0%,
+  100% {
+    opacity: 0.32;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.52;
+    transform: scale(1.02);
+  }
+}
+
+@keyframes why-tech-sweep {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes curated-orb-a {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate3d(22px, 16px, 0) scale(1.08);
+  }
+}
+
+@keyframes curated-orb-b {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate3d(-18px, -20px, 0) scale(1.06);
+  }
+}
+
+@keyframes how-bubble-a {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate3d(18px, 14px, 0) scale(1.08);
+  }
+}
+
+@keyframes how-bubble-b {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate3d(-14px, 18px, 0) scale(1.05);
+  }
+}
+
+@keyframes how-bubble-c {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate3d(10px, -12px, 0) scale(1.07);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-scan-line,
+  .hero-electric-text,
+  .hero-pulse-dot,
+  .hero-image-float,
+  .hero-image-ring,
+  .hero-image-ring-delayed,
+  .why-tech-card::before,
+  .curated-orb-a,
+  .curated-orb-b,
+  .how-bubble-a,
+  .how-bubble-b,
+  .how-bubble-c {
+    animation: none;
+  }
+}
+

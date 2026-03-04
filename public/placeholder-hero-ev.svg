@@ -1,0 +1,20 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="900" fill="#EFECE3"/>
+  <rect x="80" y="360" width="1040" height="260" rx="80" fill="#F6F3EA" stroke="#8FABD4" stroke-width="3" stroke-dasharray="8 10"/>
+  <circle cx="350" cy="640" r="70" fill="#E0DACE" stroke="#4A70A9" stroke-width="4"/>
+  <circle cx="850" cy="640" r="70" fill="#E0DACE" stroke="#4A70A9" stroke-width="4"/>
+  <rect x="260" y="380" width="680" height="180" rx="60" fill="#E4E0D5"/>
+  <rect x="320" y="410" width="280" height="70" rx="18" fill="#4A70A9"/>
+  <rect x="640" y="410" width="180" height="20" rx="10" fill="#8FABD4"/>
+  <rect x="640" y="445" width="220" height="20" rx="10" fill="#8FABD4" opacity="0.7"/>
+  <text x="330" y="455" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif" font-size="26" font-weight="600" fill="#FFFFFF">
+    EV lifestyle placeholder
+  </text>
+  <text x="320" y="520" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif" font-size="20" fill="#4A70A9">
+    Hero photography coming soon
+  </text>
+  <text x="320" y="550" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif" font-size="16" fill="#77716A">
+    This area will showcase your actual China Lanka Motors vehicles.
+  </text>
+</svg>
+
