@@ -17,6 +17,12 @@ export const MODEL_IMAGE_FALLBACKS = [
   '/photos/models/model_2.png'
 ];
 
+/** Multiple images per model for gallery (exterior, interior, etc.). Reuse same asset until more photos exist. */
+export const MODEL_GALLERY_FALLBACKS: [string[], string[]] = [
+  ['/photos/models/model_1.png', '/photos/models/model_1.png', '/photos/models/model_1.png'],
+  ['/photos/models/model_2.png', '/photos/models/model_2.png', '/photos/models/model_2.png']
+];
+
 export const UPDATE_IMAGE_FALLBACKS = [
   '/photos/updates/car_inside_1.png',
   '/photos/updates/car_inside_2.png'

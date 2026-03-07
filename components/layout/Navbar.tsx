@@ -46,32 +46,51 @@ export function Navbar() {
     };
   }, [isMenuOpen]);
 
+  const isModelsPage = pathname === '/models';
+  const isDarkBluePage = ['/models', '/ev-lifestyle', '/updates'].includes(pathname ?? '');
+  const headerTone = isModelsPage ? 'bg-[#4d73ab]' : isDarkBluePage ? 'bg-brand-blueDeep' : '';
+  const shellTone = isModelsPage
+    ? isScrolled
+      ? 'border-white/22 bg-[#446aa1]/82 shadow-[inset_0_1px_0_rgba(255,255,255,0.11)] backdrop-blur-md'
+      : 'border-white/18 bg-[#5077b0]/52 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-sm'
+    : isScrolled
+      ? 'border-white/15 bg-[#112f5f]/70 shadow-soft backdrop-blur-xl'
+      : 'border-white/10 bg-[#071a3b]/28 shadow-soft backdrop-blur-md';
+  const ctaTone = isModelsPage
+    ? 'bg-white text-[#3f66a0] shadow-[0_8px_24px_rgba(22,44,79,0.16)]'
+    : isScrolled
+      ? 'bg-white/92 text-brand-blueDeep shadow-soft'
+      : 'bg-white text-brand-blueDeep shadow-soft';
+  const menuButtonTone = isModelsPage
+    ? 'border-white/20 bg-white/8 text-white'
+    : isScrolled
+      ? 'border-white/20 bg-white/10 text-white'
+      : 'border-white/10 bg-white/5 text-white';
+
   return (
-    <header className="sticky top-0 z-30">
-      <div className="mx-auto w-full max-w-[86rem] px-3 py-2 sm:px-4 md:px-5">
+    <header
+      className={`sticky top-0 z-30 ${headerTone}`}
+    >
+      <div className="mx-auto w-full max-w-[110rem] px-3 py-1.5 sm:px-4 md:px-6">
         <div
-          className={`relative rounded-[1.7rem] border px-3 py-2.5 text-sm text-white transition-all duration-300 md:px-4 ${
-            isScrolled
-              ? 'border-white/15 bg-[#112f5f]/70 shadow-soft backdrop-blur-xl'
-              : 'border-white/10 bg-[#071a3b]/28 shadow-soft backdrop-blur-md'
-          }`}
+          className={`relative rounded-[1.95rem] border px-3 py-2.5 text-sm text-white transition-all duration-300 md:px-5 ${shellTone}`}
         >
-          <nav className="flex min-h-[3.35rem] items-center justify-between gap-3">
+          <nav className="flex min-h-[3.35rem] items-center justify-between gap-3 md:min-h-[3.55rem]">
             <Link href="/" className="min-w-0 flex-1 lg:flex-none">
               <span className="flex items-center gap-3">
-                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand-blueLight text-xs font-semibold text-brand-black shadow-soft">
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-brand-blueLight text-sm font-semibold text-brand-black shadow-soft">
                   CL
                 </span>
-                <span className="truncate text-sm font-semibold tracking-wide">{BRAND_NAME}</span>
+                <span className="truncate text-sm font-semibold tracking-wide md:text-base">{BRAND_NAME}</span>
               </span>
             </Link>
 
-            <ul className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-8 lg:flex">
+            <ul className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-10 lg:flex">
               {NAV_ITEMS.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="relative py-2 text-xs font-medium uppercase tracking-[0.16em] text-white/80 transition-colors hover:text-white after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:origin-left after:scale-x-0 after:bg-white after:transition-transform after:duration-200 hover:after:scale-x-100"
+                    className="relative py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white/80 transition-colors hover:text-white after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:origin-left after:scale-x-0 after:bg-white after:transition-transform after:duration-200 hover:after:scale-x-100"
                   >
                     {item.label}
                   </Link>
@@ -82,11 +101,7 @@ export function Navbar() {
             <div className="flex shrink-0 items-center gap-2 sm:gap-3">
               <Link
                 href="/test-drive"
-                className={`relative hidden overflow-hidden rounded-full px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.16em] transition sm:inline-flex lg:hidden md:px-5 ${
-                  isScrolled
-                    ? 'bg-white/92 text-brand-blueDeep shadow-soft'
-                    : 'bg-white text-brand-blueDeep shadow-soft'
-                } before:absolute before:inset-0 before:origin-left before:scale-x-0 before:rounded-full before:bg-brand-blueLight before:transition-transform before:duration-300 before:content-[""] hover:before:scale-x-100`}
+                className={`relative hidden overflow-hidden rounded-full px-6 py-3 text-[11px] font-semibold uppercase tracking-[0.2em] transition sm:inline-flex lg:hidden ${ctaTone} before:absolute before:inset-0 before:origin-left before:scale-x-0 before:rounded-full before:bg-brand-blueLight before:transition-transform before:duration-300 before:content-[""] hover:before:scale-x-100`}
               >
                 <span className="relative z-10 transition-colors duration-300 hover:text-brand-black">
                   Book Test Drive
@@ -97,22 +112,14 @@ export function Navbar() {
                 aria-expanded={isMenuOpen}
                 aria-controls="mobile-site-nav"
                 aria-label={isMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
-                className={`inline-flex h-10 w-10 items-center justify-center rounded-full border transition lg:hidden ${
-                  isScrolled
-                    ? 'border-white/20 bg-white/10 text-white'
-                    : 'border-white/10 bg-white/5 text-white'
-                }`}
+                className={`inline-flex h-10 w-10 items-center justify-center rounded-full border transition lg:hidden ${menuButtonTone}`}
                 onClick={() => setIsMenuOpen((current) => !current)}
               >
                 {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
               </button>
               <Link
                 href="/test-drive"
-                className={`relative hidden overflow-hidden rounded-full px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.16em] transition lg:inline-flex xl:px-5 ${
-                  isScrolled
-                    ? 'bg-white/92 text-brand-blueDeep shadow-soft'
-                    : 'bg-white text-brand-blueDeep shadow-soft'
-                } before:absolute before:inset-0 before:origin-left before:scale-x-0 before:rounded-full before:bg-brand-blueLight before:transition-transform before:duration-300 before:content-[""] hover:before:scale-x-100`}
+                className={`relative hidden overflow-hidden rounded-full px-7 py-3 text-[11px] font-semibold uppercase tracking-[0.2em] transition lg:inline-flex ${ctaTone} before:absolute before:inset-0 before:origin-left before:scale-x-0 before:rounded-full before:bg-brand-blueLight before:transition-transform before:duration-300 before:content-[""] hover:before:scale-x-100`}
               >
                 <span className="relative z-10 transition-colors duration-300 hover:text-brand-black">
                   Book Test Drive
@@ -162,4 +169,3 @@ export function Navbar() {
     </header>
   );
 }
-

@@ -24,22 +24,23 @@ export default async function UpdatesPage() {
   const updates = await getUpdates();
 
   return (
-    <div className="container-padded py-10">
-      <header className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-blueDeep/80">
-            Updates
-          </p>
-          <h1 className="mt-2 text-2xl font-semibold tracking-tight text-brand-blueDeep sm:text-3xl">
-            News and events from China Lanka Motors.
-          </h1>
-          <p className="mt-3 max-w-xl text-sm text-brand-black/75">
-            New arrivals, test drive days, and policy news that affects EV ownership in Sri Lanka.
-          </p>
-        </div>
-      </header>
+    <div className="min-h-[calc(100vh-4rem)] bg-brand-blueDeep">
+      <div className="container-padded py-10">
+        <header className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/70">
+              Updates
+            </p>
+            <h1 className="mt-2 text-2xl font-semibold tracking-tight text-white sm:text-3xl">
+              News and events from China Lanka Motors.
+            </h1>
+            <p className="mt-3 max-w-xl text-sm text-white/85">
+              New arrivals, test drive days, and policy news that affects EV ownership in Sri Lanka.
+            </p>
+          </div>
+        </header>
 
-      <section className="mt-8 grid gap-4 md:grid-cols-3">
+        <section className="mt-8 grid gap-4 md:grid-cols-3">
         {updates.length > 0 ? (
           updates.map((update: any, index: number) => (
             <UpdateCard
@@ -82,8 +83,9 @@ export default async function UpdatesPage() {
         )}
       </section>
 
-      <div className="mt-10 text-xs text-brand-black/55">
-        For press or partnership enquiries, please reach out via the contact details in our footer.
+        <div className="mt-10 text-xs text-white/60">
+          For press or partnership enquiries, please reach out via the contact details in our footer.
+        </div>
       </div>
     </div>
   );
