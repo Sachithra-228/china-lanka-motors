@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { CuratedVisualsSection } from '@/components/common/CuratedVisualsSection';
+import { FaqScrollSection } from '@/components/home/FaqScrollSection';
 import { Hero } from '@/components/common/Hero';
+import { HowItWorksScrollSection } from '@/components/home/HowItWorksScrollSection';
 import { WhyCards } from '@/components/home/WhyCards';
 import { BRAND_NAME } from '@/lib/config';
 
@@ -111,6 +113,11 @@ export default function HomePage() {
               A boutique importer focused on vehicles that genuinely work for Sri Lankan drivers -
               from paperwork and policy to home charging and aftercare.
             </p>
+            <div className="mt-24 sm:mt-28">
+              <p className="honri-static" aria-label="HONRI">
+                HONRI
+              </p>
+            </div>
           </div>
 
           <WhyCards items={whyItems} />
@@ -119,90 +126,9 @@ export default function HomePage() {
 
       <CuratedVisualsSection />
 
-      <section className="relative overflow-hidden bg-[linear-gradient(135deg,#f0f0f0_0%,#ffffff_38%,#f5f5f5_100%)] text-brand-blueDeep">
-        <div className="absolute inset-0 opacity-35 [background-image:linear-gradient(rgba(0,0,0,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.04)_1px,transparent_1px)] [background-size:26px_26px]" />
-        <div className="how-bubble-a absolute left-[8%] top-12 h-28 w-28 rounded-full bg-brand-blueLight/18 blur-2xl" />
-        <div className="how-bubble-b absolute right-[12%] top-20 h-24 w-24 rounded-full bg-neutral-300/20 blur-2xl" />
-        <div className="how-bubble-c absolute bottom-10 left-1/3 h-20 w-20 rounded-full bg-brand-blueLight/14 blur-2xl" />
+      <HowItWorksScrollSection items={processItems} />
 
-        <div className="relative px-4 py-16 sm:px-6 lg:px-10 xl:px-14">
-          <div className="max-w-3xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-brand-blueDeep/70">
-              How It Works
-            </p>
-            <h2 className="mt-4 text-3xl font-semibold tracking-[-0.03em] sm:text-4xl md:text-5xl">
-              A simple import-to-delivery journey.
-            </h2>
-            <p className="mt-5 text-sm leading-7 text-brand-blueDeep/75 sm:text-base md:text-lg">
-              We keep the process structured, transparent, and calm from your first enquiry to
-              handover and after-sales support.
-            </p>
-          </div>
-
-          <div className="mt-10 grid gap-4 lg:grid-cols-4">
-            {processItems.map((item) => (
-              <article
-                key={item.step}
-                className="relative overflow-hidden border border-white/10 bg-[linear-gradient(160deg,#0a0a0a_0%,#171717_55%,#0c0c0c_100%)] p-6 text-white shadow-[0_18px_38px_rgba(0,0,0,0.25)]"
-              >
-                <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-neutral-400 via-white/80 to-brand-blueLight" />
-                <div className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/60">
-                  Step {item.step}
-                </div>
-                <h3 className="mt-4 text-base font-semibold text-white">{item.title}</h3>
-                <p className="mt-3 text-sm leading-6 text-white/78">{item.body}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="relative overflow-hidden bg-[linear-gradient(135deg,#f0f0f0_0%,#e5e5e5_35%,#fafafa_100%)] text-brand-blueDeep">
-        <div className="absolute inset-0 opacity-35 [background-image:linear-gradient(rgba(0,0,0,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.04)_1px,transparent_1px)] [background-size:26px_26px]" />
-        <div className="absolute left-[8%] top-8 h-48 w-48 rounded-full bg-brand-blueLight/18 blur-3xl" />
-        <div className="absolute right-[10%] top-12 h-44 w-44 rounded-full bg-neutral-300/25 blur-3xl" />
-        <div className="absolute bottom-8 left-1/2 h-36 w-36 -translate-x-1/2 rounded-full bg-brand-blueLight/14 blur-3xl" />
-
-        <div className="relative px-4 py-16 text-center sm:px-6 lg:px-10 xl:px-14">
-          <div className="mx-auto max-w-3xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-brand-blueDeep/70">
-              FAQ
-            </p>
-            <h2 className="mt-4 text-3xl font-semibold tracking-[-0.03em] sm:text-4xl md:text-5xl">
-              Common questions from first-time EV buyers.
-            </h2>
-            <p className="mt-5 text-sm leading-7 text-brand-blueDeep/75 sm:text-base md:text-lg">
-              The right answers early on make EV ownership much easier. Open a question to see the
-              details.
-            </p>
-          </div>
-
-          <div className="mx-auto mt-10 max-w-5xl overflow-hidden border border-white/12 bg-black/60 shadow-[0_18px_38px_rgba(0,0,0,0.3)] backdrop-blur-xl">
-            {faqItems.map((item, index) => (
-              <details
-                key={item.question}
-                open={index === 0}
-                className="group border-b border-white/10 last:border-b-0"
-              >
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-5 text-left marker:content-none [&::-webkit-details-marker]:hidden">
-                  <div className="flex-1 text-center">
-                    <div className="text-[11px] font-semibold uppercase tracking-[0.2em] text-white/55">
-                      Q0{index + 1}
-                    </div>
-                    <h3 className="mt-2 text-base font-semibold text-white">{item.question}</h3>
-                  </div>
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/14 bg-white/[0.08] text-xl font-light text-white/90 transition-transform duration-200 group-open:rotate-45">
-                    +
-                  </span>
-                </summary>
-                <div className="border-t border-white/10 bg-black/30 px-5 py-5 text-center text-sm leading-7 text-white/90">
-                  {item.answer}
-                </div>
-              </details>
-            ))}
-          </div>
-        </div>
-      </section>
+      <FaqScrollSection items={faqItems} />
 
       <section className="relative overflow-hidden bg-[linear-gradient(120deg,#0a0a0a_0%,#171717_45%,#1a1a1a_100%)] text-white">
         <div className="absolute inset-0 opacity-20 [background-image:linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:32px_32px]" />

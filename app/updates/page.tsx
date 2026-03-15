@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { connectDb } from '@/lib/db';
+import { UpdatesShowcase, type UpdatesShowcaseItem } from '@/components/home/UpdatesShowcase';
 import { UpdatePost } from '@/lib/models/UpdatePost';
-import { UpdateCard } from '@/components/common/UpdateCard';
 import { BRAND_NAME, UPDATE_IMAGE_FALLBACKS } from '@/lib/config';
 
 export const metadata: Metadata = {
@@ -9,6 +9,45 @@ export const metadata: Metadata = {
   description:
     'Announcements, new arrivals, test drive events, and EV news relevant to Sri Lankan drivers.'
 };
+
+const fallbackUpdates: UpdatesShowcaseItem[] = [
+  {
+    id: 'fallback-1',
+    slug: 'first-arrivals',
+    title: 'Our first eight EVs have landed',
+    category: 'News',
+    excerpt:
+      'We have brought in a curated batch of eight modern EVs, ideal for urban and peri-urban Sri Lankan use. Detailed specs are now available.',
+    content:
+      'We have brought in a curated batch of eight modern EVs, ideal for urban and peri-urban Sri Lankan use. Detailed specs are now available.',
+    coverImage: UPDATE_IMAGE_FALLBACKS[0],
+    publishedAt: new Date().toISOString()
+  },
+  {
+    id: 'fallback-2',
+    slug: 'upcoming-test-drive-weekend',
+    title: 'Upcoming test drive weekend',
+    category: 'Event',
+    excerpt:
+      'We are planning a focused weekend for test drives in and around Colombo, with staggered slots and charging demonstrations.',
+    content:
+      'We are planning a focused weekend for test drives in and around Colombo, with staggered slots and charging demonstrations.',
+    coverImage: UPDATE_IMAGE_FALLBACKS[1],
+    publishedAt: new Date().toISOString()
+  },
+  {
+    id: 'fallback-3',
+    slug: 'policy-watch',
+    title: 'EV policy watch in Sri Lanka',
+    category: 'Update',
+    excerpt:
+      'We track key policy and duty changes that impact EV ownership locally, and summarise what it means for you.',
+    content:
+      'We track key policy and duty changes that impact EV ownership locally, and summarise what it means for you.',
+    coverImage: UPDATE_IMAGE_FALLBACKS[0],
+    publishedAt: new Date().toISOString()
+  }
+];
 
 async function getUpdates() {
   try {
@@ -21,72 +60,25 @@ async function getUpdates() {
 }
 
 export default async function UpdatesPage() {
-  const updates = await getUpdates();
+  const updatesRaw = await getUpdates();
 
-  return (
-    <div className="min-h-[calc(100vh-4rem)] bg-brand-blueDeep">
-      <div className="container-padded py-10">
-        <header className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/70">
-              Updates
-            </p>
-            <h1 className="mt-2 text-2xl font-semibold tracking-tight text-white sm:text-3xl">
-              News and events from China Lanka Motors.
-            </h1>
-            <p className="mt-3 max-w-xl text-sm text-white/85">
-              New arrivals, test drive days, and policy news that affects EV ownership in Sri Lanka.
-            </p>
-          </div>
-        </header>
+  const updates: UpdatesShowcaseItem[] =
+    updatesRaw.length > 0
+      ? updatesRaw.map((update: any, index: number) => ({
+          id: String(update._id || update.slug || index),
+          slug: update.slug,
+          title: update.title,
+          category: update.category,
+          excerpt: update.excerpt,
+          content: update.content || update.excerpt,
+          coverImage: update.coverImage || UPDATE_IMAGE_FALLBACKS[index % UPDATE_IMAGE_FALLBACKS.length],
+          publishedAt: update.publishedAt
+            ? new Date(update.publishedAt).toISOString()
+            : update.createdAt
+              ? new Date(update.createdAt).toISOString()
+              : null
+        }))
+      : fallbackUpdates;
 
-        <section className="mt-8 grid gap-4 md:grid-cols-3">
-        {updates.length > 0 ? (
-          updates.map((update: any, index: number) => (
-            <UpdateCard
-              key={update._id}
-              slug={update.slug}
-              title={update.title}
-              category={update.category}
-              excerpt={update.excerpt}
-              image={update.coverImage || UPDATE_IMAGE_FALLBACKS[index % UPDATE_IMAGE_FALLBACKS.length]}
-              publishedAt={update.publishedAt}
-            />
-          ))
-        ) : (
-          <>
-            <UpdateCard
-              slug="first-arrivals"
-              title="Our first eight EVs have landed"
-              category="News"
-              excerpt="We have brought in a curated batch of eight modern EVs, ideal for urban and peri-urban Sri Lankan use. Detailed specs are now available."
-              image={UPDATE_IMAGE_FALLBACKS[0]}
-              publishedAt={new Date()}
-            />
-            <UpdateCard
-              slug="upcoming-test-drive-weekend"
-              title="Upcoming test drive weekend"
-              category="Event"
-              excerpt="We are planning a focused weekend for test drives in and around Colombo, with staggered slots and charging demonstrations."
-              image={UPDATE_IMAGE_FALLBACKS[1]}
-              publishedAt={new Date()}
-            />
-            <UpdateCard
-              slug="policy-watch"
-              title="EV policy watch in Sri Lanka"
-              category="Update"
-              excerpt="We track key policy and duty changes that impact EV ownership locally, and summarise what it means for you."
-              image={UPDATE_IMAGE_FALLBACKS[0]}
-              publishedAt={new Date()}
-            />
-          </>
-        )}
-      </section>
-
-        <div className="mt-10 text-xs text-white/60">
-          For press or partnership enquiries, please reach out via the contact details in our footer.
-        </div>
-      </div>
-    </div>
-  );
+  return <UpdatesShowcase updates={updates} />;
 }

@@ -1,26 +1,82 @@
 'use client';
 
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { submitTestDriveLead } from '@/lib/actions/testDriveActions';
+import { WHATSAPP_NUMBER } from '@/lib/config';
 
 const LOCATIONS = ['Colombo', 'Gampaha', 'Kalutara', 'Other'] as const;
+const MODEL_OPTIONS = [
+  { value: 'Honri Boma 200', label: 'Honri Boma 200' },
+  { value: 'Honri Boma 300', label: 'Honri Boma 300' }
+] as const;
+const TIME_SLOT_OPTIONS = (() => {
+  const slots: string[] = [];
+  let startMinutes = 8 * 60; // 08:00
+  const endMinutes = 18 * 60; // 18:00
+  while (startMinutes + 20 <= endMinutes) {
+    const end = startMinutes + 20;
+    const h1 = String(Math.floor(startMinutes / 60)).padStart(2, '0');
+    const m1 = String(startMinutes % 60).padStart(2, '0');
+    const h2 = String(Math.floor(end / 60)).padStart(2, '0');
+    const m2 = String(end % 60).padStart(2, '0');
+    slots.push(`${h1}:${m1} - ${h2}:${m2}`);
+    startMinutes += 20;
+  }
+  return slots;
+})();
 
 interface TestDriveFormProps {
   initialModelSlug?: string;
-  models: { slug: string; name: string }[];
+  models?: { slug: string; name: string }[];
 }
 
-export function TestDriveForm({ initialModelSlug, models }: TestDriveFormProps) {
+export function TestDriveForm({ initialModelSlug }: TestDriveFormProps) {
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [message, setMessage] = useState<string | null>(null);
+
+  const modelDefault = useMemo(() => {
+    return MODEL_OPTIONS.some((m) => m.value === initialModelSlug) ? initialModelSlug : '';
+  }, [initialModelSlug]);
 
   async function handleSubmit(formData: FormData) {
     setStatus('submitting');
     setMessage(null);
+
+    const payload = {
+      name: String(formData.get('name') || ''),
+      phone: String(formData.get('phone') || ''),
+      email: String(formData.get('email') || ''),
+      preferredModel: String(formData.get('preferredModelSlug') || ''),
+      preferredDate: String(formData.get('preferredDate') || ''),
+      preferredTime: String(formData.get('preferredTime') || ''),
+      location: String(formData.get('location') || ''),
+      notes: String(formData.get('message') || '')
+    };
+
     const result = await submitTestDriveLead(formData);
     if (result.ok) {
       setStatus('success');
-      setMessage('Thank you — we have your details and will contact you shortly.');
+      setMessage('Thank you - request submitted. Opening WhatsApp...');
+
+      const number = WHATSAPP_NUMBER.replace(/\D/g, '');
+      if (number.length >= 10) {
+        const textLines = [
+          '*New Test Drive Request*',
+          '',
+          `Name: ${payload.name}`,
+          `Phone: ${payload.phone}`,
+          `Email: ${payload.email}`,
+          `Preferred Model: ${payload.preferredModel}`,
+          `Preferred Date: ${payload.preferredDate}`,
+          `Preferred Time: ${payload.preferredTime}`,
+          `Location: ${payload.location}`,
+          `Message: ${payload.notes || '-'}`,
+          '',
+          'Sent from China Lanka Motors website'
+        ];
+        const whatsappUrl = `https://wa.me/${number}?text=${encodeURIComponent(textLines.join('\n'))}`;
+        window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+      }
     } else {
       setStatus('error');
       setMessage(result.error || 'Something went wrong. Please try again.');
@@ -77,16 +133,16 @@ export function TestDriveForm({ initialModelSlug, models }: TestDriveFormProps) 
           <select
             id="preferredModelSlug"
             name="preferredModelSlug"
-            defaultValue={initialModelSlug || ''}
+            defaultValue={modelDefault}
             required
             className="rounded-2xl border border-black/10 bg-white px-3 py-2 text-sm outline-none ring-brand-blueLight/50 focus:ring-2"
           >
             <option value="" disabled>
               Select model
             </option>
-            {models.map((m) => (
-              <option key={m.slug} value={m.slug}>
-                {m.name}
+            {MODEL_OPTIONS.map((m) => (
+              <option key={m.value} value={m.value}>
+                {m.label}
               </option>
             ))}
           </select>
@@ -107,13 +163,22 @@ export function TestDriveForm({ initialModelSlug, models }: TestDriveFormProps) 
           <label className="text-xs font-medium text-brand-black/80" htmlFor="preferredTime">
             Preferred Time slot
           </label>
-          <input
+          <select
             id="preferredTime"
             name="preferredTime"
-            placeholder="e.g. 10.00–12.00"
             required
+            defaultValue=""
             className="rounded-2xl border border-black/10 bg-white px-3 py-2 text-sm outline-none ring-brand-blueLight/50 focus:ring-2"
-          />
+          >
+            <option value="" disabled>
+              Select time slot
+            </option>
+            {TIME_SLOT_OPTIONS.map((slot) => (
+              <option key={slot} value={slot}>
+                {slot}
+              </option>
+            ))}
+          </select>
         </div>
         <div className="flex flex-col gap-1">
           <label className="text-xs font-medium text-brand-black/80" htmlFor="location">
@@ -154,9 +219,7 @@ export function TestDriveForm({ initialModelSlug, models }: TestDriveFormProps) 
       {message && (
         <div
           className={`mt-3 rounded-2xl px-3 py-2 text-xs ${
-            status === 'success'
-              ? 'bg-emerald-50 text-emerald-700'
-              : 'bg-red-50 text-red-700'
+            status === 'success' ? 'bg-emerald-50 text-emerald-700' : 'bg-red-50 text-red-700'
           }`}
         >
           {message}
@@ -173,4 +236,3 @@ export function TestDriveForm({ initialModelSlug, models }: TestDriveFormProps) 
     </form>
   );
 }
-
