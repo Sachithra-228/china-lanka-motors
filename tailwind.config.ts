@@ -8,11 +8,14 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        unbounded: ['var(--font-unbounded)', 'cursive']
+      },
       colors: {
         brand: {
           cream: '#EFECE3',
-          blueLight: '#8FABD4',
-          blueDeep: '#4A70A9',
+          blueLight: '#a3a3a3',
+          blueDeep: '#0a0a0a',
           black: '#000000'
         }
       },

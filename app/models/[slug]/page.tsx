@@ -4,18 +4,17 @@ import { notFound } from 'next/navigation';
 import { connectDb } from '@/lib/db';
 import { VehicleModel } from '@/lib/models/Model';
 import { TestDriveForm } from '@/components/common/TestDriveForm';
-import { BRAND_NAME, MODEL_IMAGE_FALLBACKS } from '@/lib/config';
+import { BRAND_NAME, MODEL_GALLERY_FALLBACKS } from '@/lib/config';
 
 interface PageProps {
   params: { slug: string };
 }
 
-function getFallbackModelImages(slug: string) {
+function getFallbackModelImages(slug: string): string[] {
   if (slug === 'city-hatch-ev') {
-    return [MODEL_IMAGE_FALLBACKS[1], MODEL_IMAGE_FALLBACKS[0]];
+    return MODEL_GALLERY_FALLBACKS[1];
   }
-
-  return [MODEL_IMAGE_FALLBACKS[0], MODEL_IMAGE_FALLBACKS[1]];
+  return MODEL_GALLERY_FALLBACKS[0];
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {

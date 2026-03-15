@@ -49,7 +49,7 @@ export function Hero() {
 
   return (
     <>
-      <section className="relative -mt-24 min-h-[108svh] overflow-hidden bg-[#081a3b] pt-24 text-white md:-mt-28 md:min-h-[116svh] md:pt-28">
+      <section className="relative -mt-24 min-h-[108svh] overflow-hidden bg-black pt-24 text-white md:-mt-28 md:min-h-[116svh] md:pt-28">
         <video
           className="absolute inset-0 h-full w-full object-cover"
           autoPlay
@@ -61,15 +61,15 @@ export function Hero() {
         >
           <source src={videoSrc} type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(7,24,55,0.24)_0%,rgba(7,24,55,0.34)_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.3)_0%,rgba(0,0,0,0.4)_100%)]" />
         <div className="absolute inset-0 opacity-15 [background-image:linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:38px_38px]" />
       </section>
 
-      <section ref={sceneRef} className="relative z-10 -mt-24 min-h-[220svh] bg-[#0c2552] text-white md:-mt-28">
+      <section ref={sceneRef} className="relative z-10 -mt-24 min-h-[220svh] bg-[#0a0a0a] text-white md:-mt-28">
         <div className="sticky top-0 h-[100svh] overflow-hidden">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_30%,rgba(143,171,212,0.22),transparent_28%),radial-gradient(circle_at_82%_20%,rgba(103,232,249,0.12),transparent_22%),linear-gradient(135deg,#0b2248_0%,#13386c_48%,#0f2e57_100%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_30%,rgba(163,163,163,0.15),transparent_28%),radial-gradient(circle_at_82%_20%,rgba(255,255,255,0.06),transparent_22%),linear-gradient(135deg,#0a0a0a_0%,#141414_48%,#0c0c0c_100%)]" />
           <div className="absolute inset-0 opacity-20 [background-image:linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:38px_38px]" />
-          <div className="absolute left-0 top-0 h-full w-1/2 bg-gradient-to-r from-cyan-300/10 via-white/5 to-transparent blur-2xl" />
+          <div className="absolute left-0 top-0 h-full w-1/2 bg-gradient-to-r from-white/10 via-white/5 to-transparent blur-2xl" />
 
           <div className="relative mx-auto grid h-full max-w-7xl gap-10 px-4 py-12 sm:px-6 md:px-8 md:py-14 lg:grid-cols-[minmax(0,0.95fr),minmax(0,1.05fr)] lg:items-center lg:px-10 xl:px-12">
             <div className="min-w-0">
@@ -83,7 +83,7 @@ export function Hero() {
                 <h2 className="max-w-3xl text-4xl font-semibold tracking-[-0.03em] text-white sm:text-5xl md:text-6xl xl:text-7xl">
                   Drive Electric.
                   <br />
-                  <span className="hero-electric-text text-cyan-200">Live Smarter.</span>
+                  <span className="hero-electric-text text-white">Live Smarter.</span>
                 </h2>
               </div>
 
@@ -94,7 +94,7 @@ export function Hero() {
                 }}
                 className="will-change-transform"
               >
-                <p className="mt-6 max-w-2xl text-sm leading-7 text-blue-100/78 sm:text-base md:text-lg">
+                <p className="mt-6 max-w-2xl text-sm leading-7 text-white/78 sm:text-base md:text-lg">
                   China Lanka Motors delivers a modern EV experience built for Sri Lanka with quiet
                   cabins, efficient charging, smart connectivity, and practical everyday range.
                 </p>
@@ -109,13 +109,13 @@ export function Hero() {
               >
                 <Link
                   href="/models"
-                  className="rounded-full bg-white px-5 py-3 text-xs font-semibold uppercase tracking-[0.18em] text-brand-blueDeep transition hover:bg-blue-50"
+                  className="rounded-full bg-white px-5 py-3 text-xs font-semibold uppercase tracking-[0.18em] text-brand-blueDeep transition hover:bg-neutral-100"
                 >
                   Browse Models
                 </Link>
                 <Link
                   href="/test-drive"
-                  className="rounded-full border border-white/20 bg-white/[0.08] px-5 py-3 text-xs font-semibold uppercase tracking-[0.18em] text-white transition hover:border-cyan-300/40 hover:bg-white/[0.12]"
+                  className="rounded-full border border-white/20 bg-white/[0.08] px-5 py-3 text-xs font-semibold uppercase tracking-[0.18em] text-white transition hover:border-white/40 hover:bg-white/[0.12]"
                 >
                   Book Test Drive
                 </Link>

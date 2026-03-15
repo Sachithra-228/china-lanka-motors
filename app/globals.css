@@ -2,10 +2,44 @@
 @tailwind components;
 @tailwind utilities;
 
+@keyframes floatSlow {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeSlideInDelayed {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 :root {
   --bg-cream: #efece3;
-  --blue-light: #8fabd4;
-  --blue-deep: #4a70a9;
+  --blue-light: #a3a3a3;
+  --blue-deep: #0a0a0a;
   --text-black: #000000;
 }
 
@@ -36,7 +70,7 @@ body {
 }
 
 .badge {
-  @apply inline-flex items-center rounded-full bg-brand-blueLight/20 px-3 py-1 text-xs font-medium text-brand-blueDeep;
+  @apply inline-flex items-center rounded-full bg-brand-blueLight/25 px-3 py-1 text-xs font-medium text-brand-blueDeep;
 }
 
 .container-padded {
@@ -45,9 +79,9 @@ body {
 
 .hero-panel {
   background:
-    radial-gradient(circle at 15% 20%, rgba(143, 171, 212, 0.18), transparent 34%),
-    radial-gradient(circle at 85% 18%, rgba(103, 232, 249, 0.14), transparent 28%),
-    linear-gradient(135deg, #10244d 0%, #173566 42%, #0f2e57 100%);
+    radial-gradient(circle at 15% 20%, rgba(163, 163, 163, 0.12), transparent 34%),
+    radial-gradient(circle at 85% 18%, rgba(255, 255, 255, 0.06), transparent 28%),
+    linear-gradient(135deg, #0a0a0a 0%, #171717 42%, #0f0f0f 100%);
 }
 
 .hero-grid-overlay {
@@ -62,9 +96,9 @@ body {
   background: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(103, 232, 249, 0.08) 35%,
+    rgba(255, 255, 255, 0.06) 35%,
     rgba(255, 255, 255, 0.12) 50%,
-    rgba(103, 232, 249, 0.08) 65%,
+    rgba(255, 255, 255, 0.06) 65%,
     transparent 100%
   );
   animation: hero-scan 8s linear infinite;
@@ -76,7 +110,7 @@ body {
 }
 
 .hero-pulse-dot {
-  box-shadow: 0 0 0 rgba(103, 232, 249, 0.45);
+  box-shadow: 0 0 0 rgba(255, 255, 255, 0.3);
   animation: hero-pulse 1.8s ease-out infinite;
 }
 
@@ -94,10 +128,10 @@ body {
 
 .why-tech-panel {
   background:
-    radial-gradient(circle at 18% 22%, rgba(143, 171, 212, 0.16), transparent 28%),
-    radial-gradient(circle at 82% 16%, rgba(103, 232, 249, 0.12), transparent 26%),
-    linear-gradient(135deg, #0c244f 0%, #13356a 48%, #0f2f59 100%);
-  box-shadow: 0 28px 70px rgba(10, 27, 60, 0.22);
+    radial-gradient(circle at 18% 22%, rgba(163, 163, 163, 0.12), transparent 28%),
+    radial-gradient(circle at 82% 16%, rgba(255, 255, 255, 0.06), transparent 26%),
+    linear-gradient(135deg, #0a0a0a 0%, #141414 48%, #0c0c0c 100%);
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.35);
 }
 
 .why-tech-grid {
@@ -122,15 +156,15 @@ body {
   inset: 0 auto auto 0;
   width: 100%;
   height: 2px;
-  background: linear-gradient(90deg, transparent, rgba(103, 232, 249, 0.9), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
   transform: translateX(-100%);
   animation: why-tech-sweep 4.8s linear infinite;
 }
 
 .why-tech-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(103, 232, 249, 0.22);
-  box-shadow: 0 18px 36px rgba(5, 17, 41, 0.24);
+  border-color: rgba(255, 255, 255, 0.18);
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.3);
 }
 
 .curated-orb-a {
@@ -167,26 +201,26 @@ body {
   0%,
   100% {
     opacity: 1;
-    text-shadow: 0 0 12px rgba(103, 232, 249, 0.14);
+    text-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
   }
 
   50% {
     opacity: 0.92;
-    text-shadow: 0 0 22px rgba(103, 232, 249, 0.28);
+    text-shadow: 0 0 22px rgba(255, 255, 255, 0.35);
   }
 }
 
 @keyframes hero-pulse {
   0% {
-    box-shadow: 0 0 0 0 rgba(103, 232, 249, 0.4);
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.25);
   }
 
   70% {
-    box-shadow: 0 0 0 8px rgba(103, 232, 249, 0);
+    box-shadow: 0 0 0 8px rgba(255, 255, 255, 0);
   }
 
   100% {
-    box-shadow: 0 0 0 0 rgba(103, 232, 249, 0);
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
   }
 }
 

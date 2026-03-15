@@ -21,32 +21,32 @@ export function ModelsHero() {
   const nextLine = LINES[(activeIndex + 1) % LINES.length];
 
   return (
-    <section className="relative isolate min-h-[calc(100vh-5rem)] overflow-hidden bg-[#4d73ab]">
+    <section className="relative isolate min-h-[calc(100vh-5rem)] overflow-hidden bg-black">
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -left-32 top-8 h-72 w-72 rounded-full bg-[#6f95cf]/25 blur-3xl" />
-        <div className="absolute -bottom-24 right-12 h-96 w-96 rounded-full bg-[#365d97]/35 blur-3xl" />
+        <div className="absolute -left-32 top-8 h-72 w-72 rounded-full bg-white/10 blur-3xl" />
+        <div className="absolute -bottom-24 right-12 h-96 w-96 rounded-full bg-white/8 blur-3xl" />
       </div>
 
-      <div className="container-padded relative z-10 grid min-h-[calc(100vh-5rem)] items-center gap-10 py-10 md:grid-cols-[1.12fr_0.88fr] md:gap-8 md:py-14">
-        <div className="relative mx-auto w-full max-w-xl md:max-w-[58rem]">
-          <div className="hero-image-float relative">
+      <div className="container-padded relative z-10 grid min-h-[calc(100vh-5rem)] items-center gap-10 py-10 md:grid-cols-[1.2fr_0.8fr] md:gap-10 md:py-16">
+        <div className="relative mx-auto w-full max-w-2xl md:max-w-[66rem]">
+          <div className="hero-image-float relative transition-transform duration-700 ease-out hover:scale-[1.05]">
             <Image
               src="/photos/hero/hero_section_new.png"
               alt="China Lanka Motors model"
-              width={960}
-              height={600}
+              width={1200}
+              height={720}
               priority
-              className="h-auto w-full scale-[1.04] object-contain saturate-[1.05] contrast-[1.04] drop-shadow-[0_28px_40px_rgba(12,31,64,0.42)]"
-              sizes="(max-width: 768px) 92vw, 55vw"
+              className="h-auto w-full scale-[1.08] origin-center transform-gpu object-contain saturate-[1.05] contrast-[1.04] drop-shadow-[0_34px_52px_rgba(0,0,0,0.5)] motion-safe:animate-[floatSlow_7s_ease-in-out_infinite]"
+              sizes="(max-width: 768px) 96vw, 60vw"
             />
           </div>
         </div>
 
-        <div className="justify-self-end text-right md:pr-4">
-          <p className="text-[clamp(2.1rem,4.2vw,4.35rem)] font-semibold leading-tight tracking-tight text-white">
+        <div className="justify-self-end text-right md:pr-6">
+          <p className="text-[clamp(2.6rem,4.8vw,4.9rem)] font-semibold leading-tight tracking-tight text-white motion-safe:animate-[fadeSlideIn_900ms_ease-out_forwards]">
             {LINES[activeIndex]}
           </p>
-          <p className="mt-8 text-[clamp(1.8rem,3.5vw,3.55rem)] font-semibold leading-tight tracking-tight text-[#88a7d5]">
+          <p className="mt-8 text-[clamp(2.1rem,3.9vw,4.1rem)] font-semibold leading-tight tracking-tight text-white/70 motion-safe:animate-[fadeSlideInDelayed_1100ms_ease-out_forwards]">
             {nextLine}
           </p>
         </div>

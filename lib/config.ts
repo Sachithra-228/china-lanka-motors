@@ -12,15 +12,28 @@ export const NAV_ITEMS = [
 export const HERO_IMAGE = '/photos/hero/hero_section_new.png';
 export const HERO_VIDEO = '/videos/hero/honri_hero.mp4';
 
+/** Primary image per model (blue series = model 1, black = model 2). */
 export const MODEL_IMAGE_FALLBACKS = [
-  '/photos/models/model_1.png',
-  '/photos/models/model_2.png'
+  '/photos/models/blue_01.JPG',
+  '/photos/models/carblack_1.JPG'
 ];
 
-/** Multiple images per model for gallery (exterior, interior, etc.). Reuse same asset until more photos exist. */
+/** Gallery: model 1 = full blue set, model 2 = black + blue for variety. */
 export const MODEL_GALLERY_FALLBACKS: [string[], string[]] = [
-  ['/photos/models/model_1.png', '/photos/models/model_1.png', '/photos/models/model_1.png'],
-  ['/photos/models/model_2.png', '/photos/models/model_2.png', '/photos/models/model_2.png']
+  [
+    '/photos/models/blue_01.JPG',
+    '/photos/models/blue_02.JPG',
+    '/photos/models/blue_03.JPG',
+    '/photos/models/blue_04.JPG',
+    '/photos/models/blue_05.JPG',
+    '/photos/models/blue_06.JPG'
+  ],
+  [
+    '/photos/models/carblack_1.JPG',
+    '/photos/models/blue_02.JPG',
+    '/photos/models/blue_03.JPG',
+    '/photos/models/blue_04.JPG'
+  ]
 ];
 
 export const UPDATE_IMAGE_FALLBACKS = [

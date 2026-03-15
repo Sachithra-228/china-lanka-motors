@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { CuratedVisualsSection } from '@/components/common/CuratedVisualsSection';
 import { Hero } from '@/components/common/Hero';
+import { WhyCards } from '@/components/home/WhyCards';
 import { BRAND_NAME } from '@/lib/config';
 
 const whyItems = [
@@ -84,12 +85,21 @@ export default function HomePage() {
     <div>
       <Hero />
 
-      <section className="relative overflow-hidden bg-[linear-gradient(135deg,#ffffff_0%,#f5f8fe_42%,#eef4fc_100%)] text-brand-blueDeep">
-        <div className="absolute inset-0 opacity-35 [background-image:linear-gradient(rgba(74,112,169,0.06)_1px,transparent_1px),linear-gradient(90deg,rgba(74,112,169,0.06)_1px,transparent_1px)] [background-size:30px_30px]" />
-        <div className="absolute left-0 top-0 h-64 w-64 rounded-full bg-brand-blueLight/18 blur-3xl" />
-        <div className="absolute bottom-0 right-0 h-80 w-80 rounded-full bg-cyan-200/18 blur-3xl" />
+      <section className="relative overflow-hidden bg-[linear-gradient(135deg,#ffffff_0%,#f5f5f5_42%,#eeeeee_100%)] text-brand-blueDeep">
+        <div
+          className="absolute inset-0 opacity-60"
+          style={{
+            backgroundImage: `
+              linear-gradient(to right, rgba(0,0,0,0.06) 1px, transparent 1px),
+              linear-gradient(to bottom, rgba(0,0,0,0.06) 1px, transparent 1px)
+            `,
+            backgroundSize: '24px 24px'
+          }}
+        />
+        <div className="absolute left-0 top-0 h-64 w-64 rounded-full bg-brand-blueLight/20 blur-3xl" />
+        <div className="absolute bottom-0 right-0 h-80 w-80 rounded-full bg-neutral-300/25 blur-3xl" />
 
-        <div className="relative grid gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[minmax(0,0.9fr),minmax(0,1.1fr)] lg:px-10 xl:px-14">
+        <div className="relative grid gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[minmax(0,0.85fr),minmax(0,1.15fr)] lg:px-10 xl:px-14">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.24em] text-brand-blueDeep/60">
               Why China Lanka Motors
@@ -103,30 +113,16 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="grid gap-4 sm:grid-cols-2">
-            {whyItems.map((item) => (
-              <article
-                key={item.title}
-                className="relative overflow-hidden border border-brand-blueDeep/8 bg-white/78 p-5 shadow-[0_18px_40px_rgba(74,112,169,0.08)] transition hover:border-brand-blueLight/30 hover:-translate-y-1"
-              >
-                <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-cyan-300 via-brand-blueLight to-transparent" />
-                <div className="text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-blueDeep/45">
-                  {item.index}
-                </div>
-                <h3 className="mt-4 text-base font-semibold text-brand-blueDeep">{item.title}</h3>
-                <p className="mt-3 text-sm leading-6 text-brand-black/70">{item.body}</p>
-              </article>
-            ))}
-          </div>
+          <WhyCards items={whyItems} />
         </div>
       </section>
 
       <CuratedVisualsSection />
 
-      <section className="relative overflow-hidden bg-[linear-gradient(135deg,#eef6ff_0%,#ffffff_38%,#edf5ff_100%)] text-brand-blueDeep">
-        <div className="absolute inset-0 opacity-35 [background-image:linear-gradient(rgba(74,112,169,0.07)_1px,transparent_1px),linear-gradient(90deg,rgba(74,112,169,0.07)_1px,transparent_1px)] [background-size:26px_26px]" />
-        <div className="how-bubble-a absolute left-[8%] top-12 h-28 w-28 rounded-full bg-brand-blueLight/16 blur-2xl" />
-        <div className="how-bubble-b absolute right-[12%] top-20 h-24 w-24 rounded-full bg-cyan-200/20 blur-2xl" />
+      <section className="relative overflow-hidden bg-[linear-gradient(135deg,#f0f0f0_0%,#ffffff_38%,#f5f5f5_100%)] text-brand-blueDeep">
+        <div className="absolute inset-0 opacity-35 [background-image:linear-gradient(rgba(0,0,0,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.04)_1px,transparent_1px)] [background-size:26px_26px]" />
+        <div className="how-bubble-a absolute left-[8%] top-12 h-28 w-28 rounded-full bg-brand-blueLight/18 blur-2xl" />
+        <div className="how-bubble-b absolute right-[12%] top-20 h-24 w-24 rounded-full bg-neutral-300/20 blur-2xl" />
         <div className="how-bubble-c absolute bottom-10 left-1/3 h-20 w-20 rounded-full bg-brand-blueLight/14 blur-2xl" />
 
         <div className="relative px-4 py-16 sm:px-6 lg:px-10 xl:px-14">
@@ -147,24 +143,24 @@ export default function HomePage() {
             {processItems.map((item) => (
               <article
                 key={item.step}
-                className="relative overflow-hidden border border-white/10 bg-[linear-gradient(160deg,#123b74_0%,#1a4d8b_55%,#0f3366_100%)] p-6 text-white shadow-[0_18px_38px_rgba(24,63,121,0.2)]"
+                className="relative overflow-hidden border border-white/10 bg-[linear-gradient(160deg,#0a0a0a_0%,#171717_55%,#0c0c0c_100%)] p-6 text-white shadow-[0_18px_38px_rgba(0,0,0,0.25)]"
               >
-                <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-cyan-300 via-white/80 to-brand-blueLight" />
-                <div className="text-[11px] font-semibold uppercase tracking-[0.22em] text-blue-100/60">
+                <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-neutral-400 via-white/80 to-brand-blueLight" />
+                <div className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/60">
                   Step {item.step}
                 </div>
                 <h3 className="mt-4 text-base font-semibold text-white">{item.title}</h3>
-                <p className="mt-3 text-sm leading-6 text-blue-100/78">{item.body}</p>
+                <p className="mt-3 text-sm leading-6 text-white/78">{item.body}</p>
               </article>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-[linear-gradient(135deg,#edf6ff_0%,#dceafb_35%,#f8fbff_100%)] text-brand-blueDeep">
-        <div className="absolute inset-0 opacity-35 [background-image:linear-gradient(rgba(74,112,169,0.07)_1px,transparent_1px),linear-gradient(90deg,rgba(74,112,169,0.07)_1px,transparent_1px)] [background-size:26px_26px]" />
+      <section className="relative overflow-hidden bg-[linear-gradient(135deg,#f0f0f0_0%,#e5e5e5_35%,#fafafa_100%)] text-brand-blueDeep">
+        <div className="absolute inset-0 opacity-35 [background-image:linear-gradient(rgba(0,0,0,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.04)_1px,transparent_1px)] [background-size:26px_26px]" />
         <div className="absolute left-[8%] top-8 h-48 w-48 rounded-full bg-brand-blueLight/18 blur-3xl" />
-        <div className="absolute right-[10%] top-12 h-44 w-44 rounded-full bg-cyan-200/22 blur-3xl" />
+        <div className="absolute right-[10%] top-12 h-44 w-44 rounded-full bg-neutral-300/25 blur-3xl" />
         <div className="absolute bottom-8 left-1/2 h-36 w-36 -translate-x-1/2 rounded-full bg-brand-blueLight/14 blur-3xl" />
 
         <div className="relative px-4 py-16 text-center sm:px-6 lg:px-10 xl:px-14">
@@ -181,7 +177,7 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="mx-auto mt-10 max-w-5xl overflow-hidden border border-white/12 bg-[#0d2c5a]/55 shadow-[0_18px_38px_rgba(15,49,95,0.2)] backdrop-blur-xl">
+          <div className="mx-auto mt-10 max-w-5xl overflow-hidden border border-white/12 bg-black/60 shadow-[0_18px_38px_rgba(0,0,0,0.3)] backdrop-blur-xl">
             {faqItems.map((item, index) => (
               <details
                 key={item.question}
@@ -190,16 +186,16 @@ export default function HomePage() {
               >
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-5 text-left marker:content-none [&::-webkit-details-marker]:hidden">
                   <div className="flex-1 text-center">
-                    <div className="text-[11px] font-semibold uppercase tracking-[0.2em] text-blue-100/55">
+                    <div className="text-[11px] font-semibold uppercase tracking-[0.2em] text-white/55">
                       Q0{index + 1}
                     </div>
                     <h3 className="mt-2 text-base font-semibold text-white">{item.question}</h3>
                   </div>
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/14 bg-white/[0.08] text-xl font-light text-cyan-200 transition-transform duration-200 group-open:rotate-45">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/14 bg-white/[0.08] text-xl font-light text-white/90 transition-transform duration-200 group-open:rotate-45">
                     +
                   </span>
                 </summary>
-                <div className="border-t border-white/10 bg-[#0a2348]/28 px-5 py-5 text-center text-sm leading-7 text-blue-50">
+                <div className="border-t border-white/10 bg-black/30 px-5 py-5 text-center text-sm leading-7 text-white/90">
                   {item.answer}
                 </div>
               </details>
@@ -208,14 +204,14 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-[linear-gradient(120deg,#0b234a_0%,#103562_45%,#1b4a85_100%)] text-white">
+      <section className="relative overflow-hidden bg-[linear-gradient(120deg,#0a0a0a_0%,#171717_45%,#1a1a1a_100%)] text-white">
         <div className="absolute inset-0 opacity-20 [background-image:linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:32px_32px]" />
         <div className="relative flex flex-col items-start gap-5 px-4 py-14 sm:px-6 md:flex-row md:items-center md:justify-between lg:px-10 xl:px-14">
           <div>
             <h2 className="text-2xl font-semibold tracking-[-0.03em] sm:text-3xl">
               Want to experience EV driving?
             </h2>
-            <p className="mt-3 max-w-2xl text-sm leading-7 text-blue-100/78 sm:text-base">
+            <p className="mt-3 max-w-2xl text-sm leading-7 text-white/78 sm:text-base">
               Book a calm, one-on-one test drive with our team. We will walk you through range,
               charging options, and day-to-day ownership in Sri Lanka.
             </p>
@@ -223,7 +219,7 @@ export default function HomePage() {
           <div className="flex flex-wrap gap-3">
             <Link
               href="/test-drive"
-              className="rounded-full bg-white px-5 py-3 text-xs font-semibold uppercase tracking-[0.16em] text-brand-blueDeep transition hover:bg-blue-50"
+              className="rounded-full bg-white px-5 py-3 text-xs font-semibold uppercase tracking-[0.16em] text-brand-blueDeep transition hover:bg-neutral-100"
             >
               Book Test Drive
             </Link>

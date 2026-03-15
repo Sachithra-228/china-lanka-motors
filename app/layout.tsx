@@ -1,8 +1,11 @@
 import type { Metadata } from 'next';
+import { Unbounded } from 'next/font/google';
 import './globals.css';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { WhatsAppFloatingButton } from '@/components/common/WhatsAppFloatingButton';
+
+const unbounded = Unbounded({ subsets: ['latin'], variable: '--font-unbounded' });
 
 const brandName = process.env.NEXT_PUBLIC_BRAND_NAME || 'China Lanka Motors';
 const domain = process.env.NEXT_PUBLIC_DOMAIN || 'chinalankamotors.com';
@@ -24,7 +27,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className={unbounded.variable}>
       <body className="page-shell">
         <div className="flex min-h-screen flex-col">
           <Navbar />
