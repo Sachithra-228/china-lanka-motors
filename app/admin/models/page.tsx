@@ -3,10 +3,16 @@ import { connectDb } from '@/lib/db';
 import { VehicleModel } from '@/lib/models/Model';
 import { revalidatePath } from 'next/cache';
 
+export const dynamic = 'force-dynamic';
+
 async function getModels() {
-  await connectDb();
-  const models = await VehicleModel.find({}).sort({ createdAt: 1 }).lean();
-  return JSON.parse(JSON.stringify(models));
+  try {
+    await connectDb();
+    const models = await VehicleModel.find({}).sort({ createdAt: 1 }).lean();
+    return { models: JSON.parse(JSON.stringify(models)), dbReady: true };
+  } catch {
+    return { models: [], dbReady: false };
+  }
 }
 
 async function saveModel(formData: FormData) {
@@ -19,7 +25,11 @@ async function saveModel(formData: FormData) {
   const chargeTime = String(formData.get('chargeTime') || '');
   const highlightsRaw = String(formData.get('highlights') || '');
 
-  await connectDb();
+  try {
+    await connectDb();
+  } catch {
+    return;
+  }
 
   const highlights = highlightsRaw
     .split('\n')
@@ -54,7 +64,7 @@ async function saveModel(formData: FormData) {
 }
 
 export default async function AdminModelsPage() {
-  const models = await getModels();
+  const { models, dbReady } = await getModels();
 
   return (
     <AdminLayout>
@@ -65,6 +75,11 @@ export default async function AdminModelsPage() {
             Edit your two core models. You can update names, pricing labels, range, and key
             highlights.
           </p>
+          {!dbReady && (
+            <div className="mt-4 rounded-xl border border-amber-300 bg-amber-50 px-3 py-2 text-[11px] text-amber-900">
+              Database is not connected. Add <code>MONGODB_URI</code> in Vercel project environment variables.
+            </div>
+          )}
         </div>
       </div>
 

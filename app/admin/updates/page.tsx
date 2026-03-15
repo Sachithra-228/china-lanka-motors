@@ -3,10 +3,16 @@ import { connectDb } from '@/lib/db';
 import { UpdatePost } from '@/lib/models/UpdatePost';
 import { revalidatePath } from 'next/cache';
 
+export const dynamic = 'force-dynamic';
+
 async function getUpdates() {
-  await connectDb();
-  const posts = await UpdatePost.find({}).sort({ createdAt: -1 }).lean();
-  return JSON.parse(JSON.stringify(posts));
+  try {
+    await connectDb();
+    const posts = await UpdatePost.find({}).sort({ createdAt: -1 }).lean();
+    return { posts: JSON.parse(JSON.stringify(posts)), dbReady: true };
+  } catch {
+    return { posts: [], dbReady: false };
+  }
 }
 
 async function saveUpdate(formData: FormData) {
@@ -18,7 +24,11 @@ async function saveUpdate(formData: FormData) {
   const excerpt = String(formData.get('excerpt') || '');
   const content = String(formData.get('content') || '');
 
-  await connectDb();
+  try {
+    await connectDb();
+  } catch {
+    return;
+  }
 
   if (id && id !== 'new') {
     await UpdatePost.findByIdAndUpdate(id, {
@@ -45,7 +55,7 @@ async function saveUpdate(formData: FormData) {
 }
 
 export default async function AdminUpdatesPage() {
-  const updates = await getUpdates();
+  const { posts: updates, dbReady } = await getUpdates();
 
   return (
     <AdminLayout>
@@ -53,6 +63,11 @@ export default async function AdminUpdatesPage() {
       <p className="mt-1 text-xs text-brand-black/70">
         Create and edit news, events, and policy updates that appear on the public site.
       </p>
+      {!dbReady && (
+        <div className="mt-4 rounded-xl border border-amber-300 bg-amber-50 px-3 py-2 text-[11px] text-amber-900">
+          Database is not connected. Add <code>MONGODB_URI</code> in Vercel project environment variables.
+        </div>
+      )}
 
       <div className="mt-5 space-y-4 text-xs">
         {[{ _id: 'new', title: '', slug: '', category: 'News', excerpt: '', content: '' }, ...updates].map(

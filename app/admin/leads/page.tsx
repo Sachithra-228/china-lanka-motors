@@ -3,23 +3,33 @@ import { connectDb } from '@/lib/db';
 import { TestDriveLead } from '@/lib/models/TestDriveLead';
 import { revalidatePath } from 'next/cache';
 
+export const dynamic = 'force-dynamic';
+
 async function getLeads() {
-  await connectDb();
-  const leads = await TestDriveLead.find({}).sort({ createdAt: -1 }).lean();
-  return JSON.parse(JSON.stringify(leads));
+  try {
+    await connectDb();
+    const leads = await TestDriveLead.find({}).sort({ createdAt: -1 }).lean();
+    return { leads: JSON.parse(JSON.stringify(leads)), dbReady: true };
+  } catch {
+    return { leads: [], dbReady: false };
+  }
 }
 
 async function markContacted(formData: FormData) {
   'use server';
   const id = String(formData.get('id') || '');
   if (!id) return;
-  await connectDb();
-  await TestDriveLead.findByIdAndUpdate(id, { status: 'contacted' });
+  try {
+    await connectDb();
+    await TestDriveLead.findByIdAndUpdate(id, { status: 'contacted' });
+  } catch {
+    return;
+  }
   revalidatePath('/admin/leads');
 }
 
 export default async function AdminLeadsPage() {
-  const leads = await getLeads();
+  const { leads, dbReady } = await getLeads();
 
   return (
     <AdminLayout>
@@ -27,6 +37,11 @@ export default async function AdminLeadsPage() {
       <p className="mt-1 text-xs text-brand-black/70">
         View and manage incoming test drive requests.
       </p>
+      {!dbReady && (
+        <div className="mt-4 rounded-xl border border-amber-300 bg-amber-50 px-3 py-2 text-[11px] text-amber-900">
+          Database is not connected. Add <code>MONGODB_URI</code> in Vercel project environment variables.
+        </div>
+      )}
 
       <div className="mt-5 overflow-hidden rounded-2xl border border-black/5 bg-[#F6F3EA]">
         <table className="min-w-full border-collapse text-xs">
